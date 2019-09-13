@@ -3,6 +3,7 @@ import {Alert,Dimensions,FlatList,Clipboard,TouchableOpacity,View,ScrollView,Sty
 import {Header,Content,Title,Left,Right,Button,Body,Text,Container,Card,CardItem} from 'native-base';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import DataDoa from '../data/DataDoa.json';
+import {Menu, MenuOptions, MenuOption, MenuTrigger,} from 'react-native-popup-menu';
 
 export default class Ayat extends Component
 {
@@ -14,7 +15,7 @@ export default class Ayat extends Component
       const {navigation}  = this.props;
       const index         = parseInt(this.id) - 1;
       return (
-        <View style={{width: Dimensions.get('window').width, backgroundColor: '#e5e5e5', height: Dimensions.get('window').height, marginBottom: 20}}>
+        <Container style={{width: Dimensions.get('window').width, backgroundColor: '#e5e5e5',}}>
           <StatusBar hidden={false}/>
           <Header style={s.header} androidStatusBarColor="#0173bf">
             <Left>
@@ -25,17 +26,32 @@ export default class Ayat extends Component
             </TouchableOpacity>
             </Left>
             <Body>
-              <Title>Doa Sehari Hari</Title>
+              <Title style={{fontFamily: 'SourceSansPro',fontSize: 18, fontWeight: 'bold'}}>DOA SEHARI HARI</Title>
             </Body>
             <Right>
-            <TouchableOpacity>
-              <Button transparent>
-                <Icon name="more-vert" size={20} style={{color: '#fff'}} />
-              </Button>
-            </TouchableOpacity>
-            </Right>
+            <Menu>
+              <MenuTrigger>
+              <Icon name="more-vert" style={{color: '#fff',fontWeight: 'bold',fontSize: 30}} />
+              </MenuTrigger>
+              <MenuOptions>
+              <MenuOption>
+              <Text>Salin Doa</Text>
+              </MenuOption>
+              <MenuOption>
+              <Text>Salin Arab</Text>
+              </MenuOption>
+              <MenuOption>
+              <Text>Salin Terjemahan</Text>
+              </MenuOption>
+              <MenuOption>
+              <Text>Salin Dalil</Text>
+              </MenuOption>
+              </MenuOptions>
+              </Menu>
+              </Right>
           </Header>
 
+          
           <FlatList
             data={DataDoa}
             keyExtractor={(doa, index)=>index.toString()}
@@ -47,37 +63,33 @@ export default class Ayat extends Component
             pagingEnabled={true}
             showsHorizontalScrollIndicator={false}
             renderItem={ (doa) => (
+            <Content>
               <ScrollView style={s.scrolldetail}>
-                <View style={{marginHorizontal: 15,marginTop: 15, marginBottom: 50, backgroundColor: '#fff',height: '100%',padding: 15,}}>
-                  <View header bordered style={{flex: 1,justifyContent: 'flex-start',alignItems: 'center',flexDirection: 'row'}}>
+                <View style={{marginHorizontal: 15,marginTop: 15, marginBottom: 20, backgroundColor: '#fff',height: '100%',padding: 15,}}>
+                  <View style={{justifyContent: 'flex-start', alignItems: 'center',flexDirection: 'row', marginTop: 10, marginBottom: 20}}>
                     <View style={s.id}>
-                      <Text style={{fontSize: 13,textAlign: 'center',color: '#098ee8', fontWeight: 'bold'}}>{doa.item.id}</Text>
+                      <Text style={{fontSize: 13,textAlign: 'center',color: '#098ee8', fontWeight: 'bold',fontFamily: 'SourceSansPro',}}>{doa.item.id}</Text>
                     </View>
-                    <Text style={{textAlign: 'center', color: '#098ee8', fontWeight: 'bold', fontSize: 18}}>{doa.item.title}</Text>
+                    <Text style={{textAlign: 'center', color: '#098ee8', fontWeight: 'bold', fontSize: 18,fontFamily: 'SourceSansPro',}}>{doa.item.title}</Text>
                   </View>
                   <View>
-                    <View style={{justifyContent: 'center',alignItems: 'center',}}>
-                      <Text style={s.arb}>{doa.item.arab}</Text>
-                      <Text style={s.ltn}>{doa.item.latin}</Text>
-                      <Text style={s.art}>Artinya: "{doa.item.arti}"</Text>
-                    </View>
-                  </View>
-                  <View style={{justifyContent:'center',flexDirection: 'row', marginBottom: 25, width: '100%', alignItems: 'center' }}>
-                    <View style={{height: 1, backgroundColor: '#bfbfbf', width: '38%'}}>
-                    </View>
-                    <View style={{flexDirection: 'row', marginHorizontal: 10,alignItems: 'center'}}>
-                      <Icon name="panorama-fish-eye" size={10} style={{color: '#bfbfbf'}} />
-                      <Icon name="lens" size={15} style={{color: '#bfbfbf', marginHorizontal: 5}} />
-                      <Icon name="panorama-fish-eye" size={10} style={{color: '#bfbfbf'}} />
-                    </View>
-                    <View style={{height: 1, backgroundColor: '#bfbfbf', width: '38%'}}>
+                    <View style={{}}>
+                      <View style={{justifyContent: 'flex-end'}}>
+                        <Text style={s.arb}>{doa.item.arab}</Text>
+                      </View>
+                      <View style={{justifyContent: 'flex-start'}}>
+                        <Text style={s.ltn}>{doa.item.latin}</Text>
+                        <Text style={s.art}>Artinya: "{doa.item.arti}"</Text>
+                      </View>
                     </View>
                   </View>
                 </View>
               </ScrollView>
+            </Content>
           )}
         />
-        </View>
+
+        </Container>
       );
     }
 }
@@ -94,11 +106,13 @@ const s = StyleSheet.create({
       paddingRight: 10,
     },
     headertitle: {
+      fontFamily: 'SourceSansPro',
       color: '#fff',
       fontWeight: 'bold',
       fontSize: 20,
     },
     id:{
+        fontFamily: 'SourceSansPro',
         margin: 5,
         justifyContent: 'center',
         alignItems: 'center',
@@ -110,23 +124,24 @@ const s = StyleSheet.create({
     },
     arb:{
         fontSize: 30,
-        justifyContent: 'flex-end',
         marginBottom: 15,
         color: '#4f4e4e',
         lineHeight: 50,
+        fontFamily: 'Scheherazade',
     },
     ltn:{
-      fontSize: 15,
+      fontFamily: 'SourceSansPro',
+      fontSize: 18,
       color: '#098ee8',
       marginVertical: 10,
       lineHeight: 25,
     },
     art:{
-      fontSize: 15,
+      fontFamily: 'SourceSansPro',
+      fontSize: 18,
       marginTop: 10,
       textAlign: 'justify',
       color: '#4f4e4e',
-      marginBottom: 30,
       lineHeight: 25,
     },
     scrolldetail:{

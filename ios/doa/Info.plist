@@ -74,6 +74,11 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 		<string>Fontisto.ttf</string>
+		<string>Scheherazade.ttf</string>
+		<string>SourceSansPro_bold_italic.ttf</string>
+		<string>SourceSansPro_bold.ttf</string>
+		<string>SourceSansPro_italic.ttf</string>
+		<string>SourceSansPro.ttf</string>
 	</array>
 </dict>
 </plist>

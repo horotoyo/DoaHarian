@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StatusBar,Text,Image,FlatList,TouchableOpacity,TouchableHighlight,ScrollView,Dimensions,Animated,View,StyleSheet} from 'react-native';
-import {Container,Header} from 'native-base';
+import {Container,Header,Right,Left,Content,Body,Button} from 'native-base';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import DaftarIsi from './data/DaftarIsi.json';
 
@@ -12,9 +12,14 @@ export default class Main extends Component
       <Container>
         
         <Header style={s.header} androidStatusBarColor="#0173bf">
-          <Icon name="spa" size={18} style={{color:"#fff"}} />
-          <Text style={s.headertitle}>Kumpulan Doa Sehari Hari</Text>
-          <Icon name="spa" size={18} style={{color:"#fff"}} />
+          <View style={{paddingLeft: 80}}>
+            <Text style={s.headertitle}>DOA DOA SEHARI HARI</Text>
+          </View>
+          <View style={{marginRight: 10}}>
+            <TouchableOpacity style={{}} onPress={()=>this.props.navigation.navigate('About')}>
+                <Icon name="info" size={25} style={{color: '#fff'}} />
+            </TouchableOpacity>
+          </View>
         </Header>
 
         <ScrollView
@@ -30,10 +35,10 @@ export default class Main extends Component
               <View>
                 <TouchableOpacity
                   style={s.fl}
-                  onPress={()=>this.props.navigation.navigate('Ayat',{pageId:daftar.item.id})}
+                  onPress={()=>this.props.navigation.navigate('Doa',{pageId:daftar.item.id})}
                 >
                   <View style={s.id}>
-                    <Text style={{fontSize: 18,textAlign: 'center',color: '#098ee8', fontWeight: 'bold'}}>{daftar.item.id}</Text>
+                    <Text style={{fontSize: 18,textAlign: 'center',color: '#fff', fontWeight: 'bold'}}>{daftar.item.id}</Text>
                   </View>
                   <View style={s.title}>
                     <Text style={{textAlign: 'justify',fontSize: 16, marginTop: 5}}>{daftar.item.title}</Text>
@@ -55,15 +60,15 @@ const s = StyleSheet.create({
     header: {
       backgroundColor: '#098ee8',
       height: 90,
-      justifyContent: 'center',
       alignItems: 'center',
       elevation: 5,
-      justifyContent: 'space-around',
+      justifyContent: 'space-between'
     },
     headertitle: {
       color: '#fff',
       fontWeight: 'bold',
       fontSize: 20,
+      fontFamily: 'SourceSansPro'
     },
     naps:{
         marginLeft: 5,
@@ -81,7 +86,7 @@ const s = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        marginTop: 8,
+        marginTop: 5,
         marginBottom: 5,
         paddingVertical: 5,
         backgroundColor: '#fff',
@@ -90,11 +95,10 @@ const s = StyleSheet.create({
         margin: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: '#098ee8',
-        borderWidth: 1,
+        backgroundColor: '#098ee8',
         width: 30,
         height: 30,
-        borderRadius: 50,
+        borderRadius: 8,
     },
     title:{
         margin: 5,
@@ -108,4 +112,8 @@ const s = StyleSheet.create({
         marginRight: 5,
         justifyContent: 'center',
     },
+    pop:{
+      paddingVertical: 5,
+      paddingHorizontal: 10
+    }
 });
