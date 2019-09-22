@@ -16,6 +16,7 @@ export default class Doa extends Component
     id      = this.props.navigation.getParam('pageId');
     index   = parseInt(this.id) - 1;
     data    = DataDoa[this.index];
+    link    = 'Download Aplikasi Kumpulan Doa Sehari Hari di Playstore https://play.google.com/store/apps/details?id=com.doa.harian';
 
    handleScroll(event) {
       const id = event.nativeEvent.contentOffset.x / Dimensions.get('window').width + 1;
@@ -28,7 +29,7 @@ export default class Doa extends Component
 
    cpAll = async (abc) => {
         const data    = DataDoa[abc - 1];
-        const atext   = data.title + '\n \n' + data.arab + '\n \n' + data.latin + '\n \n' + data.arti;
+        const atext   = data.title + '\n \n' + data.arab + '\n \n' + data.latin + '\n \n' + data.arti + '\n \n' + this.link;
         await Clipboard.setString(atext);
         Alert.alert(
             'Salin Doa',
@@ -71,6 +72,7 @@ export default class Doa extends Component
       const index         = parseInt(this.id) - 1;
       const hal           = parseInt(this.id);
       const paramId       = navigation.getParam('id');
+      const decision      = (paramId == hal);
 
       return (
         <Container style={{width: Dimensions.get('window').width, backgroundColor: '#efefef'}}>
@@ -106,7 +108,7 @@ export default class Doa extends Component
                 <Icon name="more-vert" style={{color: '#fff',fontWeight: 'bold',fontSize: 20}} />
               </MenuTrigger>
               <MenuOptions>
-                  <MenuOption onSelect={()=>this.cpAll(paramId)}>
+                  <MenuOption onSelect={()=>this.cpAll(paramId ? paramId : hal)}>
                      <Text style={{
                         fontSize: 14,
                         fontFamily: 'SourceSansPro',
@@ -117,7 +119,7 @@ export default class Doa extends Component
                         Salin Doa
                      </Text>
                   </MenuOption>
-                  <MenuOption onSelect={()=>this.cpArb(paramId)}>
+                  <MenuOption onSelect={()=>this.cpArb(paramId ? paramId : hal)}>
                      <Text style={{
                         fontSize: 14,
                         fontFamily: 'SourceSansPro',
@@ -128,7 +130,7 @@ export default class Doa extends Component
                         Salin Arab
                      </Text>
                   </MenuOption>
-                  <MenuOption onSelect={()=>this.cpLtn(paramId)}>
+                  <MenuOption onSelect={()=>this.cpLtn(paramId ? paramId : hal)}>
                      <Text style={{
                         fontSize: 14,
                         fontFamily: 'SourceSansPro',
@@ -138,7 +140,7 @@ export default class Doa extends Component
                         Salin Latin
                      </Text>
                   </MenuOption>
-                  <MenuOption onSelect={()=>this.cpArt(paramId)}>
+                  <MenuOption onSelect={()=>this.cpArt(paramId ? paramId : hal)}>
                      <Text style={{
                         fontSize: 14,
                         fontFamily: 'SourceSansPro',

@@ -129,7 +129,7 @@ export default class About extends Component
               </View>
               <View style={s.boxmedsos}>
                 <Icon name="phone-android" size={15} color="#515151" style={{marginRight: 8}} />
-                <Text style={s.medsos}>0857 2524 9265 / 0822 5718 2656 (Irhamullah)</Text>
+                <Text style={s.medsos}>0857 2524 9265 (Irhamullah)</Text>
               </View>
               <View style={s.boxmedsos}>
                 <Icon name="home" size={15} color="#515151" style={{marginRight: 8}} />
